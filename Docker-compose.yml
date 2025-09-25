@@ -1,0 +1,63 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npx ng serve --host 0.0.0.0 --port 4200 --poll=2000
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "5034:80"     # http
+  #     - "7234:443"    # https
+  #   volumes:
+  #     - data-protection-keys:/root/.aspnet/DataProtection-Keys
+  #   depends_on:
+  #     - mysql
+  #   command: >
+  #     sh -c "dotnet ef database update &&
+  #          dotnet backend.dll"
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:80;https://+:443
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: PontoEletronico
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - db_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - db_network
+
+volumes:
+  mysql_data:
+  # data-protection-keys:
+
+networks:
+  db_network:
+    driver: bridge

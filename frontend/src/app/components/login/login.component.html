@@ -1,0 +1,40 @@
+<div class="form-body">
+  <div class="form-holder">
+    <div class="form-content">
+      <div class="form-items">
+        <h3>Sistema ponto Eletrônico</h3>
+        <p>Acesso a plataforma de ponto</p>
+
+        <div style="display: flex; gap: 5px;">
+          <div class="page-links">
+            <a href="javascript:void(0)" [class.active]="formAtual === 'login'" (click)="formAtual = 'login'">Login</a>
+          </div>
+          <div class="page-links">
+            <a href="javascript:void(0)" [class.active]="formAtual === 'primeiro'"
+              (click)="formAtual = 'primeiro'">Primeiro Acesso</a>
+          </div>
+        </div>
+
+        <form *ngIf="formAtual === 'login'" [formGroup]="formLogin" (ngSubmit)="handleLogin()">
+          <input class="form-control" type="text" formControlName="username" placeholder="E-mail Address" required>
+          <input class="form-control" type="password" formControlName="password" placeholder="Password" required>
+          <div class="form-button">
+            <button type="submit" class="ibtn">Login</button>
+          </div>
+        </form>
+
+        <form *ngIf="formAtual === 'primeiro'" [formGroup]="formPrimeiro" (ngSubmit)="handlePrimeiro()">
+          <input class="form-control" type="text" formControlName="nome" placeholder="Nome completo" required>
+          <input class="form-control" type="email" formControlName="email" placeholder="E-mail" required>
+          <input class="form-control" type="password" formControlName="senha" placeholder="Senha" required>
+          <input class="form-control" type="text" formControlName="matricula" placeholder="Matricula" maxlength="8"
+            required>
+          <div class="form-button">
+            <button type="submit" class="ibtn">Cadastrar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

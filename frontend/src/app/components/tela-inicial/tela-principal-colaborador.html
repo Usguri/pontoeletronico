@@ -1,0 +1,58 @@
+<body>
+
+  <div class="container_home">
+
+    <div class="sidebar">
+
+      <!-- <img src="/assets/logo_angular.png" alt="Logo do Sistema"> -->
+
+      <label for="meses">Selecionar Mês:</label>
+      <select (change)="selectMonth($event)">
+        <option value="">--Selecione--</option>
+        <option *ngFor="let item of meses" [value]="item.valor">
+          {{ item.mes }}
+        </option>
+      </select>
+
+      <button (click)="gerarRelatorio()" style="background-color: #0000ff;">Gerar Relatório</button>
+      <button (click)="handleCurrentMonth()" style="background-color: #34b334;">Pontos Mês Atual</button>
+      <button (click)="handleLogout()" style="background-color: #dc143c;">Sair do Sistema</button>
+
+    </div>
+
+    <div class="main-content">
+      <h2><b>Ponto Eletrônico</b></h2>
+      <div class="banner">
+        <button class="banner_btn" (click)="registrarOperacao(1)">Registrar
+          Entrada</button>
+        <button class="banner_btn" (click)="registrarOperacao(2)">Registrar
+          Saída</button>
+      </div>
+
+      <div class="week-points">
+        <table>
+          <thead>
+            <tr>
+              <th>Colaborador</th>
+              <th>Matrícula</th>
+              <th>Dia</th>
+              <th>Entrada</th>
+              <th>Saída</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ponto of weekPoints">
+              <td>{{ ponto.nome }}</td>
+              <td>{{ ponto.matricula }}</td>
+              <td>{{ getNomeDia(ponto.dia) }}</td>
+              <td>{{ getOrganizaDataHora(ponto.registroEntrada) }}</td>
+              <td>{{ getOrganizaDataHora(ponto.registroSaida) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</body>
