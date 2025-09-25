@@ -5,6 +5,7 @@
 /out-tsc
 /bazel-out
 .vscode
+minhas_anotacoes
 
 # Node
 /node_modules

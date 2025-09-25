@@ -43,4 +43,4 @@ configurar o banco de dados em appsettings
 dotnet ef migrations add tabela -> criar as migrattions
 dotnet ef database update - > atualizar
 
-acessar o swagger http://localhost:5034/swagger/index.html
+acessar o swagger https://localhost:7234/swagger/index.html
